@@ -31,6 +31,8 @@ class VendedoresTable extends Table
         parent::initialize($config);
 
         $this->setTable('vendedores');
+        $this->setDisplayField('COD_VENDED');
+        $this->setPrimaryKey('COD_VENDED');
     }
 
     /**
@@ -48,7 +50,7 @@ class VendedoresTable extends Table
             ->add('ID_VENDEDOR', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->allowEmpty('COD_VENDED');
+            ->allowEmpty('COD_VENDED', 'create');
 
         $validator
             ->allowEmpty('NOMBRE_VEN');

@@ -18,7 +18,7 @@ class ClientesFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'ID_CLIENTE' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'COD_CLIENT' => ['type' => 'string', 'length' => 6, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'COD_CLIENT' => ['type' => 'string', 'length' => 6, 'null' => false, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'RAZON_SOCI' => ['type' => 'string', 'length' => 60, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'COD_VENDED' => ['type' => 'string', 'length' => 2, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'COD_ZONA' => ['type' => 'string', 'length' => 2, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -36,11 +36,20 @@ class ClientesFixture extends TestFixture
         'TELEFONO_1' => ['type' => 'string', 'length' => 30, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'TELEFONO_2' => ['type' => 'string', 'length' => 30, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'TIPO_DOC' => ['type' => 'string', 'length' => 30, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        '_indexes' => [
+            'COD_VENDED' => ['type' => 'index', 'columns' => ['COD_VENDED'], 'length' => []],
+            'COD_ZONA' => ['type' => 'index', 'columns' => ['COD_ZONA'], 'length' => []],
+            'COND_VTA' => ['type' => 'index', 'columns' => ['COND_VTA'], 'length' => []],
+        ],
         '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['COD_CLIENT'], 'length' => []],
             'ID_CLIENTE' => ['type' => 'unique', 'columns' => ['ID_CLIENTE'], 'length' => []],
+            'clientes_ibfk_1' => ['type' => 'foreign', 'columns' => ['COD_VENDED'], 'references' => ['vendedores', 'COD_VENDED'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'clientes_ibfk_2' => ['type' => 'foreign', 'columns' => ['COD_ZONA'], 'references' => ['zonas', 'COD_ZONA'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'clientes_ibfk_3' => ['type' => 'foreign', 'columns' => ['COND_VTA'], 'references' => ['planes', 'COND_VTA'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8_general_ci'
         ],
     ];
@@ -54,7 +63,7 @@ class ClientesFixture extends TestFixture
     public $records = [
         [
             'ID_CLIENTE' => 1,
-            'COD_CLIENT' => 'Lore',
+            'COD_CLIENT' => '087d6465-99cd-4050-bfb8-758b187f9b11',
             'RAZON_SOCI' => 'Lorem ipsum dolor sit amet',
             'COD_VENDED' => '',
             'COD_ZONA' => '',
@@ -63,7 +72,7 @@ class ClientesFixture extends TestFixture
             'CUPO_CREDI' => 1.5,
             'DOMICILIO' => 'Lorem ipsum dolor sit amet',
             'E_MAIL' => 'Lorem ipsum dolor sit amet',
-            'FECHA_ALTA' => '2017-08-02 13:02:35',
+            'FECHA_ALTA' => '2017-08-02 20:47:52',
             'LOCALIDAD' => 'Lorem ipsum dolor sit amet',
             'C_POSTAL' => 'Lorem ',
             'PROVINCIA' => 'Lorem ipsum dolor sit amet',

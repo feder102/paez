@@ -2,10 +2,10 @@
     <div id="leftside-navigation" class="nano">
         <ul class="nano-content">
             <li class="active">
-                <?= '<i class="fa fa-cogs"></i>', $this->Html->link(__('Clientes'), ['controller'=>'Clientes','action' => 'index']) ?>
+                <?= $this->Html->link(__('Clientes'), ['controller'=>'Clientes','action' => 'index']) ?>
             </li>
-            <li class="sub-menu">
-                <?= $this->Html->link(__('Cuotas'), ['controller'=>'Cuotas','action' => 'index']) ?>
+            <!-- <li class="sub-menu">
+                <?php //$this->Html->link(__('Cuotas'), ['controller'=>'Cuotas','action' => 'index']) ?>
                 <a href=""><i class="fa fa-cogs"></i><span>UI Elements</span><i class="arrow fa fa-angle-right pull-right"></i></a>
                 <ul>
                     <li><a href="ui-alerts-notifications.html">Alerts &amp; Notifications</a>
@@ -24,7 +24,7 @@
                     <li><a href="tables-data.html">Data Tables</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
         </ul>
     </div>
 </aside>

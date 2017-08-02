@@ -8,8 +8,8 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $cliente->ID_CLIENTE],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->ID_CLIENTE)]
+                ['action' => 'delete', $cliente->COD_CLIENT],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->COD_CLIENT)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Clientes'), ['action' => 'index']) ?></li>
@@ -20,7 +20,7 @@
     <fieldset>
         <legend><?= __('Edit Cliente') ?></legend>
         <?php
-            echo $this->Form->control('COD_CLIENT');
+            echo $this->Form->control('ID_CLIENTE');
             echo $this->Form->control('RAZON_SOCI');
             echo $this->Form->control('COD_VENDED');
             echo $this->Form->control('COD_ZONA');

@@ -7,14 +7,14 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Cliente'), ['action' => 'edit', $cliente->ID_CLIENTE]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Cliente'), ['action' => 'delete', $cliente->ID_CLIENTE], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->ID_CLIENTE)]) ?> </li>
+        <li><?= $this->Html->link(__('Edit Cliente'), ['action' => 'edit', $cliente->COD_CLIENT]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Cliente'), ['action' => 'delete', $cliente->COD_CLIENT], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->COD_CLIENT)]) ?> </li>
         <li><?= $this->Html->link(__('List Clientes'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Cliente'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="clientes view large-9 medium-8 columns content">
-    <h3><?= h($cliente->ID_CLIENTE) ?></h3>
+    <h3><?= h($cliente->COD_CLIENT) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('COD CLIENT') ?></th>

@@ -31,6 +31,8 @@ class ClientesTable extends Table
         parent::initialize($config);
 
         $this->setTable('clientes');
+        $this->setDisplayField('COD_CLIENT');
+        $this->setPrimaryKey('COD_CLIENT');
     }
 
     /**
@@ -48,7 +50,7 @@ class ClientesTable extends Table
             ->add('ID_CLIENTE', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->allowEmpty('COD_CLIENT');
+            ->allowEmpty('COD_CLIENT', 'create');
 
         $validator
             ->allowEmpty('RAZON_SOCI');

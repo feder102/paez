@@ -31,6 +31,8 @@ class CuotasTable extends Table
         parent::initialize($config);
 
         $this->setTable('cuotas');
+        $this->setDisplayField('N_COMP_CAN');
+        $this->setPrimaryKey(['N_COMP_CAN', 'T_COMP_CAN']);
     }
 
     /**
@@ -65,15 +67,10 @@ class CuotasTable extends Table
             ->allowEmpty('T_COMP');
 
         $validator
-            ->allowEmpty('N_COMP_CAN');
+            ->allowEmpty('N_COMP_CAN', 'create');
 
         $validator
-            ->allowEmpty('T_COMP_CAN');
-
-        $validator
-            ->dateTime('FECHA_CAN')
-            ->requirePresence('FECHA_CAN', 'create')
-            ->notEmpty('FECHA_CAN');
+            ->allowEmpty('T_COMP_CAN', 'create');
 
         return $validator;
     }

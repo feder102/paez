@@ -31,6 +31,8 @@ class PlanesTable extends Table
         parent::initialize($config);
 
         $this->setTable('planes');
+        $this->setDisplayField('COND_VTA');
+        $this->setPrimaryKey('COND_VTA');
     }
 
     /**
@@ -48,8 +50,7 @@ class PlanesTable extends Table
             ->add('ID_PLAN', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->integer('COND_VTA')
-            ->allowEmpty('COND_VTA');
+            ->allowEmpty('COND_VTA', 'create');
 
         $validator
             ->allowEmpty('DESC_COND');

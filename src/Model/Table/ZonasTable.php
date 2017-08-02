@@ -31,6 +31,8 @@ class ZonasTable extends Table
         parent::initialize($config);
 
         $this->setTable('zonas');
+        $this->setDisplayField('COD_ZONA');
+        $this->setPrimaryKey('COD_ZONA');
     }
 
     /**
@@ -48,7 +50,7 @@ class ZonasTable extends Table
             ->add('ID_ZONA', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->allowEmpty('COD_ZONA');
+            ->allowEmpty('COD_ZONA', 'create');
 
         $validator
             ->allowEmpty('NOMBRE_ZON');

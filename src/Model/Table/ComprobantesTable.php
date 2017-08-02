@@ -31,6 +31,8 @@ class ComprobantesTable extends Table
         parent::initialize($config);
 
         $this->setTable('comprobantes');
+        $this->setDisplayField('N_COMP');
+        $this->setPrimaryKey(['N_COMP', 'T_COMP']);
     }
 
     /**
@@ -68,10 +70,10 @@ class ComprobantesTable extends Table
             ->allowEmpty('FECHA_CANC');
 
         $validator
-            ->allowEmpty('N_COMP');
+            ->allowEmpty('N_COMP', 'create');
 
         $validator
-            ->allowEmpty('T_COMP');
+            ->allowEmpty('T_COMP', 'create');
 
         $validator
             ->decimal('IMPORTE')

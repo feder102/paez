@@ -14,7 +14,7 @@
     <fieldset>
         <legend><?= __('Add Cliente') ?></legend>
         <?php
-            echo $this->Form->control('COD_CLIENT');
+            echo $this->Form->control('ID_CLIENTE');
             echo $this->Form->control('RAZON_SOCI');
             echo $this->Form->control('COD_VENDED');
             echo $this->Form->control('COD_ZONA');
