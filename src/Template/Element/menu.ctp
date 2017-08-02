@@ -2,9 +2,10 @@
     <div id="leftside-navigation" class="nano">
         <ul class="nano-content">
             <li class="active">
-                <a href="index.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+                <?= '<i class="fa fa-cogs"></i>', $this->Html->link(__('Clientes'), ['controller'=>'Clientes','action' => 'index']) ?>
             </li>
             <li class="sub-menu">
+                <?= $this->Html->link(__('Cuotas'), ['controller'=>'Cuotas','action' => 'index']) ?>
                 <a href=""><i class="fa fa-cogs"></i><span>UI Elements</span><i class="arrow fa fa-angle-right pull-right"></i></a>
                 <ul>
                     <li><a href="ui-alerts-notifications.html">Alerts &amp; Notifications</a>

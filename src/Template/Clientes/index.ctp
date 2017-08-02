@@ -13,9 +13,7 @@
                 <th scope="col"><?= $this->Paginator->sort('RAZON_SOCI') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('COND_VTA') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('CUIT') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('CUPO_CREDI') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('DOMICILIO') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('FECHA_ALTA') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('TELEFONO_1') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -23,18 +21,17 @@
         <tbody>
             <?php foreach ($clientes as $cliente): ?>
             <tr>
-                <td><?= $this->Number->format($cliente->ID_CLIENTE) ?></td>
                 <td><?= h($cliente->COD_CLIENT) ?></td>
                 <td><?= h($cliente->RAZON_SOCI) ?></td>
                 <td><?= h($cliente->COND_VTA) ?></td>
                 <td><?= h($cliente->CUIT) ?></td>
-                <td><?= $this->Number->format($cliente->CUPO_CREDI) ?></td>
+                <!-- <td><?php //$this->Number->format($cliente->CUPO_CREDI) ?></td> -->
                 <td><?= h($cliente->DOMICILIO) ?></td>
                 <td><?= h($cliente->TELEFONO_1) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $cliente->ID_CLIENTE]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cliente->ID_CLIENTE]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cliente->ID_CLIENTE], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->ID_CLIENTE)]) ?>
+                    <?= $this->Html->link(__('Ver'), ['action' => 'view', $cliente->ID_CLIENTE]) ?>
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cliente->ID_CLIENTE]) ?>
+                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $cliente->ID_CLIENTE], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->ID_CLIENTE)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
