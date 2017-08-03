@@ -231,7 +231,7 @@ return [
             //'port' => 'non_standard_port_number',
             'username' => 'root',
             'password' => '',
-            'database' => 'cobros_plus',
+            'database' => 'paez',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],
