@@ -4,15 +4,7 @@
   * @var \App\Model\Entity\Cliente[]|\Cake\Collection\CollectionInterface $clientes
   */
 ?>
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <!-- <ul class="side-nav">-->
-        <!-- <li class="heading"><?php //__('Actions') ?></li> -->
-        <!-- <li><?php //$this->Html->link(__('New Cliente'), ['action' => 'add']) ?></li> -->
-    <!--</ul> -->
-</nav>
+
 <div class="clientes index large-9 medium-8 columns content">
     <h3><?= __('Clientes') ?></h3>
     <table id="example" class="display"  cellpadding="0" cellspacing="0">
@@ -51,19 +43,12 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+    
 </div>
-<script type="text/javascript">
+<script type="text/javascript" language="javascript" class="init">
+
 $(document).ready(function() {
-  $('#example').DataTable();
+$('#example').DataTable();
 } );
+
 </script>
