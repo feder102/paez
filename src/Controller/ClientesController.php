@@ -12,19 +12,38 @@ use App\Controller\AppController;
  */
 class ClientesController extends AppController
 {
-
+    public $paginate = [
+         'limit' => 10,
+         'order' => [
+            'Clientes.COD_CLIENT' => 'asc'
+         ]
+      ];
     /**
      * Index method
      *
      * @return \Cake\Http\Response|void
      */
-    public function index()
+    public function initialize()
     {
-        $clientes = $this->paginate($this->Clientes->find('all', array('limit'=>'10')));
-
-        $this->set(compact('clientes'));
-        $this->set('_serialize', ['clientes']);
+       parent::initialize();
+       $this->loadComponent('Paginator');
     }
+    public function index($search = null)
+    {
+       $query = $this->Clientes->find();
+       if($search){
+         $query->where(['COD_CLIENT LIKE' => '%'.$search.'%']);
+       }
+       $this->set('clientes', $this->paginate($query));
+    }
+    // public function index()
+    // {
+    //     $clientes = $this->paginate($this->Clientes);
+    //     // $clientes = $this->Clientes->find('all');
+    //     // pr($clientes);
+    //     $this->set(compact('clientes'));
+    //     $this->set('_serialize', ['clientes']);
+    // }
 
     /**
      * View method
