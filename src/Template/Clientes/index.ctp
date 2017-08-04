@@ -4,6 +4,7 @@
   * @var \App\Model\Entity\Cliente[]|\Cake\Collection\CollectionInterface $clientes
   */
   //http://lorenzofox3.github.io/smart-table-website/
+  use Cake\Routing\Router;
   $this->Paginator->options(array(
     'update'=>'#content',
     'before'=>'',
@@ -11,55 +12,55 @@
   ));
 ?>
 
-<div class="clientes index large-9 medium-8 columns content">
+<div class="clientes index large-9 medium-8 columns content" ng-controller="ClienteIndex">
     <h3><?= __('Clientes') ?></h3>
-    <?= $this->Form->create('Clientes'); ?>
     <?php
-        echo $this->Form->create("Post", array(
-            ['action' => 'search',
-            'controller'=>'clientes']
-        ));
-        echo $this->Form->input("keyword", array(
-            "label" => "",
-            "type" => "search",
-            "placeholder" => "Buscar cliente..."
-        ));
-        echo $this->Form->end();
+      //pr($clientes);
     ?>
-    <table cellpadding="0" cellspacing="0">
+
+    <table st-table="clientes" class="table table-striped">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('COD_CLIENT') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('RAZON_SOCI') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('COD_VENDED') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('CUIT') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('DOMICILIO') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('LOCALIDAD') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('PROVINCIA') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('TELEFONO_1') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('TELEFONO_2') ?></th>
+              <th colspan="4"><input st-search="COD_CLIENT" placeholder="Ingrese codigo de cliente" class="input-sm form-control" type="search"/></th>
+              <th colspan="2"><input st-search="RAZON_SOCI" placeholder="Ingrese nombre" class="input-sm form-control" type="search"/></th>
+              <th colspan="4"><input st-search="COD_VENDED" placeholder="Ingrese codigo de vendedor" class="input-sm form-control" type="search"/></th>
+            </tr>
+            <tr>
+                <th st-sort="COD_CLIENT" st-skip-natural="true">Cod.Cliente</th>
+                <th st-sort="RAZON_SOCI" st-skip-natural="true">Nombre</th>
+                <th st-sort="COD_VENDED" st-skip-natural="true">Cod.Vendedor</th>
+                <th st-sort="CUIT" st-skip-natural="true">CUIT</th>
+                <th st-sort="DOMICILIO" st-skip-natural="true">Direccion</th>
+                <th st-sort="LOCALIDAD" st-skip-natural="true">Localidad</th>
+                <th st-sort="PROVINCIA" st-skip-natural="true">Provincia</th>
+                <th st-sort="TELEFONO_1" st-skip-natural="true">Telf-1</th>
+                <th st-sort="TELEFONO_2" st-skip-natural="true">Telf-2</th>
+
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($clientes as $cliente): ?>
-            <tr>
-                <td><?= h($cliente->COD_CLIENT) ?></td>
-                <td><?= h($cliente->RAZON_SOCI) ?></td>
-                <td><?= h($cliente->COD_VENDED) ?></td>
-                <td><?= h($cliente->CUIT) ?></td>
-                <td><?= h($cliente->DOMICILIO) ?></td>
-                <td><?= h($cliente->LOCALIDAD) ?></td>
-                <td><?= h($cliente->PROVINCIA) ?></td>
-                <td><?= h($cliente->TELEFONO_1) ?></td>
-                <td><?= h($cliente->TELEFONO_2) ?></td>
+            <?php //foreach ($clientes as $cliente): ?>
+            <tr ng-repeat="row in clientes">
+                  <td>{{row.COD_CLIENT}}</td>
+                  <td>{{row.RAZON_SOCI}}</td>
+                  <td>{{row.COD_VENDED}}</td>
+                  <td>{{row.CUIT}}</td>
+                  <td>{{row.DOMICILIO}}</td>
+                  <td>{{row.LOCALIDAD}}</td>
+                  <td>{{row.PROVINCIA}}</td>
+                  <td>{{row.TELEFONO_1}}</td>
+                  <td>{{row.TELEFONO_2}}</td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Ver'), ['action' => 'view', $cliente->COD_CLIENT]) ?>
-                    <?= $this->Html->link(__('Comprobantes'), ['controller'=>'comprobantes','action' => 'vercomprobantecliente', $cliente->COD_CLIENT]) ?>
-                    <?= $this->Form->postLink(__('Elimnar'), ['action' => 'delete', $cliente->COD_CLIENT], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->COD_CLIENT)]) ?>
+                  <button type="button" ng-click="vercomprobantecliente(row.COD_CLIENT)" class="btn btn-sm btn-primary">
+                      <i class="glyphicon glyphicon-edit"></i>
+                  </button>
+                    <?php //$this->Html->link(__('Ver'), ['action' => 'view', $cliente->COD_CLIENT]) ?>
+                    <?php //$this->Html->link(__('Comprobantes'), ['controller'=>'comprobantes','action' => 'vercomprobantecliente', $cliente->COD_CLIENT]) ?>
+                    <?php //$this->Form->postLink(__('Elimnar'), ['action' => 'delete', $cliente->COD_CLIENT], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->COD_CLIENT)]) ?>
                 </td>
             </tr>
-            <?php endforeach; ?>
+            <?php //endforeach; ?>
         </tbody>
     </table>
     <div class="paginator">
@@ -71,5 +72,18 @@
             <?= $this->Paginator->last(__('Atras') . ' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Pag {{page}} de {{pages}}, mostrando {{current}} de {{count}} totales')]) ?></p>
+        <p>Si no encuentra el cliente avance de pagina.</p>
     </div>
 </div>
+<script type="text/javascript">
+mainApp.controller('ClienteIndex', function($scope,$http){
+
+    $scope.clientes = <?php echo json_encode($clientes) ?>;
+    console.log($scope.clientes);
+    $scope.vercomprobantecliente = function (cli){
+      debugger;
+      var url= "<?php echo Router::url(array('controller' => 'comprobantes', 'action' => 'vercomprobantecliente')) ?>" + '/' + cli;
+      location.href = url;
+    }
+});
+</script>

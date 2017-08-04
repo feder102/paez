@@ -33,16 +33,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
     <?= $this->Html->css('dataTables') ?>
+    <?php echo $this->Html->css('../font-awesome/css/font-awesome'); ?>
 
     <?= $this->Html->script('jquery-3.2.1') ?>
-    <?= $this->Html->script('jquery.dataTables') ?>
+    <?php echo $this->Html->script(array('angular/angular.js','angular/1.5.6-angular-route.min.js','angular/app/app')); ?>
+    <?php echo $this->Html->script('../angular-smart-table/dist/smart-table'); ?>
+
+
 
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body>
+<body ng-app="mainApp">
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">

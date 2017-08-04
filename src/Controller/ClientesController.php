@@ -13,7 +13,7 @@ use App\Controller\AppController;
 class ClientesController extends AppController
 {
     public $paginate = [
-         'limit' => 10,
+         'limit' => 50,
          'order' => [
             'Clientes.COD_CLIENT' => 'asc'
          ]
