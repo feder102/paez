@@ -2,7 +2,10 @@
     <div id="leftside-navigation" class="nano">
         <ul class="nano-content">
             <li class="active">
-                <?= $this->Html->link(__('Clientes'), ['controller'=>'Clientes','action' => 'index']) ?>
+                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user-circle-o')).'Clientes', array('controller' => 'clientes', 'action' => 'index'), array('escape' => false)) ?>
+            </li>
+            <li>
+              <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-file-text')).'Comprobantes', array('controller' => 'comprobantes', 'action' => 'dashboard'), array('escape' => false)) ?>
             </li>
             <!-- <li class="sub-menu">
                 <?php //$this->Html->link(__('Cuotas'), ['controller'=>'Cuotas','action' => 'index']) ?>

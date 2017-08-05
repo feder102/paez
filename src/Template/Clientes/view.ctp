@@ -4,36 +4,27 @@
   * @var \App\Model\Entity\Cliente $cliente
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Cliente'), ['action' => 'edit', $cliente->COD_CLIENT]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Cliente'), ['action' => 'delete', $cliente->COD_CLIENT], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->COD_CLIENT)]) ?> </li>
-        <li><?= $this->Html->link(__('List Clientes'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Cliente'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
 <div class="clientes view large-9 medium-8 columns content">
-    <h3><?= h($cliente->COD_CLIENT) ?></h3>
+    <h3><?= h($cliente->RAZON_SOCI) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('COD CLIENT') ?></th>
+            <th scope="row"><?= __('CODIGO CLIENTE') ?></th>
             <td><?= h($cliente->COD_CLIENT) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('RAZON SOCI') ?></th>
+            <th scope="row"><?= __('RAZON SOCIAL') ?></th>
             <td><?= h($cliente->RAZON_SOCI) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('COD VENDED') ?></th>
+            <th scope="row"><?= __('CODIGO VENDEDEDOR') ?></th>
             <td><?= h($cliente->COD_VENDED) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('COD ZONA') ?></th>
+            <th scope="row"><?= __('CODIGO ZONA') ?></th>
             <td><?= h($cliente->COD_ZONA) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('COND VTA') ?></th>
+            <th scope="row"><?= __('CODIGO VTA') ?></th>
             <td><?= h($cliente->COND_VTA) ?></td>
         </tr>
         <tr>
@@ -45,7 +36,7 @@
             <td><?= h($cliente->DOMICILIO) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('E MAIL') ?></th>
+            <th scope="row"><?= __('E-MAIL') ?></th>
             <td><?= h($cliente->E_MAIL) ?></td>
         </tr>
         <tr>
@@ -53,7 +44,7 @@
             <td><?= h($cliente->LOCALIDAD) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('C POSTAL') ?></th>
+            <th scope="row"><?= __('CODIGO POSTAL') ?></th>
             <td><?= h($cliente->C_POSTAL) ?></td>
         </tr>
         <tr>
@@ -61,11 +52,11 @@
             <td><?= h($cliente->PROVINCIA) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('NOM COM') ?></th>
+            <th scope="row"><?= __('NOMBRE COMPROBANTE') ?></th>
             <td><?= h($cliente->NOM_COM) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('DIR COM') ?></th>
+            <th scope="row"><?= __('DIRECCION COMPROBANTE') ?></th>
             <td><?= h($cliente->DIR_COM) ?></td>
         </tr>
         <tr>
@@ -77,7 +68,7 @@
             <td><?= h($cliente->TELEFONO_2) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('TIPO DOC') ?></th>
+            <th scope="row"><?= __('TIPO DOCUMENTO') ?></th>
             <td><?= h($cliente->TIPO_DOC) ?></td>
         </tr>
         <tr>
@@ -85,7 +76,7 @@
             <td><?= $this->Number->format($cliente->ID_CLIENTE) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('CUPO CREDI') ?></th>
+            <th scope="row"><?= __('CUPO CREDITO') ?></th>
             <td><?= $this->Number->format($cliente->CUPO_CREDI) ?></td>
         </tr>
         <tr>

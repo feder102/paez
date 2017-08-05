@@ -25,6 +25,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
 
+    <?php echo $this->Html->css('../bootstrap/css/bootstrap.min'); ?>
+    <?php echo $this->Html->script('../bootstrap/js/bootstrap.min'); ?>
 
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('font-awesome.min') ?>
@@ -58,7 +60,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </nav>
 
     <?php echo $this->Element('menu'); ?>
-    <div class="container clearfix">
+    <div class="">
+      <!-- <div class="container clearfix"> -->
       <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </div>

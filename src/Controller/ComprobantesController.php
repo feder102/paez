@@ -32,7 +32,13 @@ class ComprobantesController extends AppController
         $this->set(compact('comprobantes'));
         $this->set('_serialize', ['comprobantes']);
     }
-
+    public function dashboard($id = null)
+    {
+        // $comprobantes = $this->paginate($this->Comprobantes->find('all',array('conditions'=> array('Comprobantes.COD_CLIENT'=>$id))));
+        // // pr($comprobantes);
+        // $this->set(compact('comprobantes'));
+        // $this->set('_serialize', ['comprobantes']);
+    }
     /**
      * View method
      *
