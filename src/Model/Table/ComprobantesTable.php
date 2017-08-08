@@ -33,6 +33,10 @@ class ComprobantesTable extends Table
         $this->setTable('comprobantes');
         $this->setDisplayField('N_COMP');
         $this->setPrimaryKey(['N_COMP', 'T_COMP']);
+
+        $this->belongsTo('Cuotas', [
+            'foreignKey' => 'N_COMP'
+        ]);
     }
 
     /**

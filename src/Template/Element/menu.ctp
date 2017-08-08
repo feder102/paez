@@ -5,7 +5,13 @@
                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user-circle-o')).'Clientes', array('controller' => 'clientes', 'action' => 'index'), array('escape' => false)) ?>
             </li>
             <li>
-              <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-file-text')).'Comprobantes', array('controller' => 'comprobantes', 'action' => 'dashboard'), array('escape' => false)) ?>
+              <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-file-text')).'Cobranza diaria', array('controller' => 'comprobantes', 'action' => 'dashboard'), array('escape' => false)) ?>
+            </li>
+            <li>
+              <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-file-text')).'Resumen diario', array('controller' => 'comprobantes', 'action' => 'dashboard'), array('escape' => false)) ?>
+              <!-- una grilla con los datos de las cuotas cobradas osea estado_VTO=CAN; -->
+              <!-- cod_cliente; razon_social; cod_vended; n_comp_can; fecha_can;importe_vt -->
+              <!-- unir 3 tablas clientes, comprobantes, cuotas -->
             </li>
             <!-- <li class="sub-menu">
                 <?php //$this->Html->link(__('Cuotas'), ['controller'=>'Cuotas','action' => 'index']) ?>

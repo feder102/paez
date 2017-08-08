@@ -32,12 +32,49 @@ class ComprobantesController extends AppController
         $this->set(compact('comprobantes'));
         $this->set('_serialize', ['comprobantes']);
     }
-    public function dashboard($id = null)
+    public function dashboard()
     {
-        // $comprobantes = $this->paginate($this->Comprobantes->find('all',array('conditions'=> array('Comprobantes.COD_CLIENT'=>$id))));
-        // // pr($comprobantes);
-        // $this->set(compact('comprobantes'));
-        // $this->set('_serialize', ['comprobantes']);
+        $cantidad_cuotas = $this->Comprobantes->Cuotas->find('all');
+        $cantidad_cuotas = $cantidad_cuotas->count();
+        // pr ($cantidad_cuotas);
+
+        $cuotas_cobradas = $this->Comprobantes->Cuotas->find('all',array('conditions'=> array('Cuotas.ESTADO_VTO'=> 'CAN')));
+        $cuotas_cobradas = $cuotas_cobradas->count();
+        // pr ($cuotas_cobradas);
+
+        $cuotas_pendientes = $this->Comprobantes->Cuotas->find('all',array('conditions'=> array('Cuotas.ESTADO_VTO'=> 'PEN')));
+        $cuotas_pendientes = $cuotas_pendientes->count();
+        // pr ($cuotas_pendientes);
+        
+        $total_cobrar = $this->Comprobantes->Cuotas->find('all');
+        $suma_cobrar = $total_cobrar->select(['sum' => $total_cobrar->func()
+                        ->sum('Cuotas.IMPORTE_VT')])
+                        ->toArray();
+        $suma_cobrar = $suma_cobrar[0]['sum'];
+        if(empty($suma_cobrar)){
+          $suma_cobrar = 0;
+        }
+
+        $total_cobrado = $this->Comprobantes->Cuotas->find('all', array('conditions'=> array('Cuotas.ESTADO_VTO'=>'CAN')));
+        $suma_cobrado = $total_cobrado->select(['sum' => $total_cobrado->func()
+                        ->sum('Cuotas.IMPORTE_VT')])
+                        ->toArray();
+        $suma_cobrado = $suma_cobrado[0]['sum'];
+        if(empty($suma_cobrado)){
+          $suma_cobrado = 0;
+        }
+
+        $total_pendiente = $this->Comprobantes->Cuotas->find('all', array('conditions'=> array('Cuotas.ESTADO_VTO'=>'PEN')));
+        $suma_pendiente = $total_pendiente->select(['sum' => $total_pendiente->func()
+                        ->sum('Cuotas.IMPORTE_VT')])
+                        ->toArray();
+        $suma_pendiente = $suma_pendiente[0]['sum'];
+        if(empty($suma_pendiente)){
+          $suma_pendiente = 0;
+        }
+
+        $this->set(compact('cantidad_cuotas','cuotas_cobradas','cuotas_pendientes','suma_cobrar','suma_cobrado','suma_pendiente'));
+        $this->set('_serialize', ['cantidad_cuotas','cuotas_cobradas','cuotas_pendientes','suma_cobrar','suma_cobrado','suma_pendiente']);
     }
     /**
      * View method
