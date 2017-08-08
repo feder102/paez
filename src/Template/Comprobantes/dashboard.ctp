@@ -98,13 +98,13 @@ mainApp.controller('DashboardIndex', function($scope,$http){
     $scope.suma_cobrado = <?php echo json_encode($suma_cobrado) ?>;
     $scope.suma_pendiente = <?php echo json_encode($suma_pendiente) ?>;
     console.log($scope.suma_cobrar);
-    $scope.vercomprobantecliente = function (cli){
-      var url= "<?php echo Router::url(array('controller' => 'comprobantes', 'action' => 'vercomprobantecliente')) ?>" + '/' + cli;
-      location.href = url;
-    }
-    $scope.vercliente = function (cli){
-      var url= "<?php echo Router::url(array('controller' => 'clientes', 'action' => 'view')) ?>" + '/' + cli;
-      location.href = url;
-    }
+    // $scope.vercomprobantecliente = function (cli){
+    //   var url= "<?php //echo Router::url(array('controller' => 'comprobantes', 'action' => 'vercomprobantecliente')) ?>" + '/' + cli;
+    //   location.href = url;
+    // }
+    // $scope.vercliente = function (cli){
+    //   var url= "<?php //echo Router::url(array('controller' => 'clientes', 'action' => 'view')) ?>" + '/' + cli;
+    //   location.href = url;
+    // }
 });
 </script>
