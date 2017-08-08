@@ -33,6 +33,9 @@ class VendedoresTable extends Table
         $this->setTable('vendedores');
         $this->setDisplayField('COD_VENDED');
         $this->setPrimaryKey('COD_VENDED');
+        $this->belongsTo('Comprobantes', [
+            'foreignKey' => 'N_COMP'
+        ]);
     }
 
     /**

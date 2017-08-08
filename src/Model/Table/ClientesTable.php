@@ -33,6 +33,11 @@ class ClientesTable extends Table
         $this->setTable('clientes');
         $this->setDisplayField('COD_CLIENT');
         $this->setPrimaryKey('COD_CLIENT');
+
+        $this->belongsTo('Vendedores', [
+            'foreignKey' => 'COD_VENDED'
+        ]);
+        
     }
 
     /**

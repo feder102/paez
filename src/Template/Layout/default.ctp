@@ -25,8 +25,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
 
-    <?php echo $this->Html->css('../bootstrap/css/bootstrap.min'); ?>
-    <?php echo $this->Html->script('../bootstrap/js/bootstrap.min'); ?>
+
 
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('font-awesome.min') ?>
@@ -38,6 +37,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php echo $this->Html->css('../font-awesome/css/font-awesome'); ?>
 
     <?= $this->Html->script('jquery-3.2.1') ?>
+    <?php echo $this->Html->css('../bootstrap/css/bootstrap.min'); ?>
+    <?php echo $this->Html->script('../bootstrap/js/bootstrap.min'); ?>
     <?php echo $this->Html->script(array('angular/angular.js','angular/1.5.6-angular-route.min.js','angular/app/app')); ?>
     <?php echo $this->Html->script('../angular-smart-table/dist/smart-table'); ?>
 

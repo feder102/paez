@@ -36,7 +36,7 @@
                 <th st-sort="TELEFONO_1" st-skip-natural="true">Telf-1</th>
                 <th st-sort="TELEFONO_2" st-skip-natural="true">Telf-2</th>
 
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <!-- <th scope="col" class="actions"><?php// __('Actions') ?></th> -->
             </tr>
         </thead>
         <tbody>
@@ -51,7 +51,7 @@
                   <td>{{row.PROVINCIA}}</td>
                   <td>{{row.TELEFONO_1}}</td>
                   <td>{{row.TELEFONO_2}}</td>
-                <td class="actions">
+                <!-- <td class="actions">
                   <button type="button" title="Comprobante del cliente" ng-click="vercomprobantecliente(row.COD_CLIENT)" class="btn btn-sm btn-success">
                       <i class="fa fa-file-text"></i>
                   </button>
@@ -61,7 +61,7 @@
                     <?php //$this->Html->link(__('Ver'), ['action' => 'view', $cliente->COD_CLIENT]) ?>
                     <?php //$this->Html->link(__('Comprobantes'), ['controller'=>'comprobantes','action' => 'vercomprobantecliente', $cliente->COD_CLIENT]) ?>
                     <?php //$this->Form->postLink(__('Elimnar'), ['action' => 'delete', $cliente->COD_CLIENT], ['confirm' => __('Are you sure you want to delete # {0}?', $cliente->COD_CLIENT)]) ?>
-                </td>
+                </td> -->
             </tr>
             <?php //endforeach; ?>
         </tbody>

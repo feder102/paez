@@ -11,7 +11,7 @@ use Cake\Routing\Router;
     <section id="main-content">
         <!--tiles start-->
         <div class="row">
-            <div class="col-md-4 col-sm-6">
+            <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
                 <div class="dashboard-tile detail tile-purple">
                     <div class="content">
                         <h1 class="text-left timer" data-from="0" data-to="180" data-speed="2500"> </h1>
@@ -23,7 +23,7 @@ use Cake\Routing\Router;
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
                 <div class="dashboard-tile detail tile-turquoise">
                     <div class="content">
                         <h1 class="text-left timer" data-from="0" data-to="56" data-speed="2500"> </h1>
@@ -35,7 +35,7 @@ use Cake\Routing\Router;
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
                 <div class="dashboard-tile detail tile-red">
                     <div class="content">
                         <h1 class="text-left timer" data-from="0" data-to="32" data-speed="2500"> </h1>
@@ -47,7 +47,9 @@ use Cake\Routing\Router;
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+          </div>
+          <div class="row">
+            <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
                 <div class="dashboard-tile detail tile-purple">
                     <div class="content">
                         <h1 class="text-left timer" data-to="105" data-speed="2500"> </h1>
@@ -59,7 +61,7 @@ use Cake\Routing\Router;
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
                 <div class="dashboard-tile detail tile-turquoise">
                     <div class="content">
                         <h1 class="text-left timer" data-to="105" data-speed="2500"> </h1>
@@ -71,7 +73,7 @@ use Cake\Routing\Router;
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
                 <div class="dashboard-tile detail tile-red">
                     <div class="content">
                         <h1 class="text-left timer" data-to="105" data-speed="2500"> </h1>

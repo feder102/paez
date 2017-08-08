@@ -37,6 +37,12 @@ class ComprobantesTable extends Table
         $this->belongsTo('Cuotas', [
             'foreignKey' => 'N_COMP'
         ]);
+        $this->hasMany('Clientes', [
+            'foreignKey' => 'COD_CLIENT'
+        ]);
+        $this->belongsTo('Vendedores', [
+            'foreignKey' => 'COD_VENDED'
+        ]);
     }
 
     /**
