@@ -45,7 +45,7 @@ class ComprobantesController extends AppController
         $cuotas_pendientes = $this->Comprobantes->Cuotas->find('all',array('conditions'=> array('Cuotas.ESTADO_VTO'=> 'PEN')));
         $cuotas_pendientes = $cuotas_pendientes->count();
         // pr ($cuotas_pendientes);
-        
+
         $total_cobrar = $this->Comprobantes->Cuotas->find('all');
         $suma_cobrar = $total_cobrar->select(['sum' => $total_cobrar->func()
                         ->sum('Cuotas.IMPORTE_VT')])
@@ -76,6 +76,7 @@ class ComprobantesController extends AppController
         $this->set(compact('cantidad_cuotas','cuotas_cobradas','cuotas_pendientes','suma_cobrar','suma_cobrado','suma_pendiente'));
         $this->set('_serialize', ['cantidad_cuotas','cuotas_cobradas','cuotas_pendientes','suma_cobrar','suma_cobrado','suma_pendiente']);
     }
+    
     /**
      * View method
      *
@@ -83,6 +84,7 @@ class ComprobantesController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+
     public function view($id = null)
     {
         $comprobante = $this->Comprobantes->get($id, [

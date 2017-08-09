@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Cuotas Controller
@@ -12,12 +13,22 @@ use App\Controller\AppController;
  */
 class CuotasController extends AppController
 {
-
+    public $paginate = [
+         'limit' => 20,
+         'order' => [
+            'Clientes.RAZON_SOCI' => 'asc'
+         ]
+      ];
     /**
      * Index method
      *
      * @return \Cake\Http\Response|void
      */
+    public function initialize()
+    {
+      parent::initialize();
+      $this->loadComponent('Paginator');
+    }
     public function index()
     {
         $cuotas = $this->paginate($this->Cuotas);
@@ -41,6 +52,108 @@ class CuotasController extends AppController
 
         $this->set('cuota', $cuota);
         $this->set('_serialize', ['cuota']);
+    }
+    public function DayReportInit(){
+      // $query = $this->Cuotas->find('all')
+      //       ->join([
+      //           'Comprobantes' => [
+      //               'table' => 'comprobantes',
+      //               'type' => 'inner',
+      //               'conditions' => 'Cuotas.N_COMP = Comprobantes.N_COMP',
+      //           ]
+      //       ])->toArray();
+
+//EL DE ABAJO FUNCIONA PERO NO ANDA EL PAGINATOR
+      // $connection = ConnectionManager::get('default');
+      // $sql_todo = $connection->execute('SELECT comprobantes.cod_client,clientes.razon_soci,comprobantes.cod_vended,cuotas.ESTADO_VTO,cuotas.importe_vt
+      //         FROM cuotas left join comprobantes on cuotas.N_COMP =comprobantes.n_comp left join clientes on comprobantes.cod_client=clientes.COD_CLIENT
+      //         order by cuotas.id_cuota')->fetchAll('assoc');
+
+
+      $query = $this->Cuotas->find()
+                ->select(['c.COD_CLIENT','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
+                ->join([
+                        'table' => 'Comprobantes',
+                        'alias' => 'c',
+                        'type' => 'INNER',
+                        'conditions' => 'c.N_COMP = Cuotas.N_COMP',
+                ])
+                ->contain(['Comprobantes','Comprobantes.Clientes'])
+                ->join(['table' => 'Clientes',
+                'alias' => 'cl',
+                'type' => 'INNER',
+                'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
+                ])
+                ->autoFields(true);
+        $sql_todo = $this->paginate($query);
+      $this->set(compact('todos'));
+      $this->set(array('todos'=> $sql_todo));
+    }
+    public function pendientes(){
+      $this->autoRender = false;
+      // $connection = ConnectionManager::get('default');
+      // $sql_pen = $connection->execute('SELECT comprobantes.cod_client,clientes.razon_soci,comprobantes.cod_vended,cuotas.ESTADO_VTO,cuotas.importe_vt
+      //             FROM cuotas left join comprobantes on cuotas.N_COMP =comprobantes.n_comp left join clientes on comprobantes.cod_client=clientes.COD_CLIENT
+      //             where cuotas.estado_vto= "PEN"
+      //             order by cuotas.id_cuota')->fetchAll('assoc');
+      $sql_pen = $this->Cuotas->find()
+                ->select(['c.COD_CLIENT','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
+                ->join([
+                        'table' => 'Comprobantes',
+                        'alias' => 'c',
+                        'type' => 'INNER',
+                        'conditions' => 'c.N_COMP = Cuotas.N_COMP',
+                ])
+                ->where(['Cuotas.ESTADO_VTO'=> 'PEN'])
+                ->contain(['Comprobantes','Comprobantes.Clientes'])
+                ->join(['table' => 'Clientes',
+                'alias' => 'cl',
+                'type' => 'INNER',
+                'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
+                ])
+                ->autoFields(true);
+        // $sql_pen = $this->paginate($query);
+      $a = array();
+      $a = $sql_pen->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
+      $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
+        // pr($a);
+      $this->set(compact(array(
+          'data' => $a,
+           '_serialize' => array('data')
+      )));
+    }
+    public function cobrados(){
+      $this->autoRender = false;
+      // $connection = ConnectionManager::get('default');
+      // $results = $connection->execute('SELECT comprobantes.cod_client,clientes.razon_soci,comprobantes.cod_vended,cuotas.ESTADO_VTO,cuotas.importe_vt
+      //             FROM cuotas left join comprobantes on cuotas.N_COMP =comprobantes.n_comp left join clientes on comprobantes.cod_client=clientes.COD_CLIENT
+      //             where cuotas.estado_vto="CAN"
+      //             order by cuotas.id_cuota')->fetchAll('assoc');
+      $sql_cobrados = $this->Cuotas->find()
+                ->select(['c.COD_CLIENT','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
+                ->join([
+                        'table' => 'Comprobantes',
+                        'alias' => 'c',
+                        'type' => 'INNER',
+                        'conditions' => 'c.N_COMP = Cuotas.N_COMP',
+                ])
+                ->where(['Cuotas.ESTADO_VTO'=> 'CAN'])
+                ->contain(['Comprobantes','Comprobantes.Clientes'])
+                ->join(['table' => 'Clientes',
+                'alias' => 'cl',
+                'type' => 'INNER',
+                'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
+                ])
+                ->autoFields(true);
+                // $sql_pen = $this->paginate($query);
+      $a = array();
+      $a = $sql_cobrados->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
+      $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
+        // pr($a);
+      $this->set(compact(array(
+          'data' => $a,
+           '_serialize' => array('data')
+      )));
     }
 
     /**

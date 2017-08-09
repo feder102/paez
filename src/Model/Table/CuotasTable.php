@@ -32,7 +32,10 @@ class CuotasTable extends Table
 
         $this->setTable('cuotas');
         $this->setDisplayField('N_COMP_CAN');
-        $this->setPrimaryKey(['N_COMP_CAN', 'T_COMP_CAN']);
+        $this->setPrimaryKey(['ID_CUOTA']);
+        $this->hasMany('Comprobantes', [
+            'foreignKey' => 'N_COMP'
+        ]);
     }
 
     /**
