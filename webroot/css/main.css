@@ -504,7 +504,7 @@ li.dropdown ul.dropdown-menu.alert>li h1 {
     -moz-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
-    background: #f1f2f7;
+    /*background: #f1f2f7;*/
     min-height: 1000px;
 }
 .main-content-toggle-left {
