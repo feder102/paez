@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside id="sidebar" class="sidebar">
     <div id="leftside-navigation" class="nano">
         <ul class="nano-content">
             <li class="active">
@@ -49,3 +49,10 @@
         </ul>
     </div>
 </aside>
+<script type="text/javascript">
+$(document).ready(function() {
+  $( "#leftside-navigation" ).click(function() {
+    $( this ).toggleClass( "show" );
+  });
+});
+</script>

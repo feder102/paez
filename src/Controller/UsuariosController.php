@@ -33,15 +33,19 @@ class UsuariosController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function login($id = null)
     {
-        $usuario = $this->Usuarios->get($id, [
-            'contain' => []
-        ]);
 
-        $this->set('usuario', $usuario);
-        $this->set('_serialize', ['usuario']);
+      // $this->layout = 'onePage';
+      $this->viewBuilder()->layout('onePage');
+        // $usuario = $this->Usuarios->get($id, [
+        //     'contain' => []
+        // ]);
+        //
+        // $this->set('usuario', $usuario);
+        // $this->set('_serialize', ['usuario']);
     }
+
 
     /**
      * Add method

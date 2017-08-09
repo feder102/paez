@@ -50,31 +50,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<header id="header_fede">
-  <nav  data-topbar role="navigation">
-      <ul class="title-area large-3 medium-4 columns">
-          <li class="name">
-              <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-          </li>
-      </ul>
-      <div class="toggle-navigation toggle-left">
-          <ul>
-            <button type="button" class="btn btn-default" id="toggle-left" data-toggle="tooltip" data-placement="right" title="Toggle Navigation">
-              <i class="fa fa-bars"></i>
-          </button>
-        </ul>
-      <div class="top-bar-section">
-      </div>
 
-  </nav>
-
-  </div>
-</header>
 <body ng-app="mainApp">
 
-    <?php echo $this->Element('menu'); ?>
-    <!-- <div> -->
-      <div class="container clearfix">
+    <?php //echo $this->Element('menu'); ?>
+    <div class="">
+      <!-- <div class="container clearfix"> -->
       <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </div>
@@ -82,22 +63,3 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </footer>
 </body>
 </html>
-<script type="text/javascript">
-$(document).ready(function() {
-var addOrRemove = false;
-  $( "#toggle-left" ).click(function() {
-    // debugger;
-    // $( "#sidebar" ).toggleClass( 'sidebar sidebar-toggle', addOrRemove );
-    if ( addOrRemove ) {
-      addOrRemove = false;
-      $( "#sidebar" ).removeClass( 'sidebar sidebar-toggle' );
-      $( "#sidebar" ).addClass( 'sidebar' );
-    } else {
-      addOrRemove = true;
-      $( "#sidebar" ).removeClass( 'sidebar' );
-      $( "#sidebar" ).addClass( 'sidebar sidebar-toggle' );
-    }
-
-  });
-});
-</script>

@@ -100,6 +100,63 @@ img {
     padding-top: 23px;
     padding-right: 20px;
 }
+
+#header_fede {
+    z-index: 200;
+    background: #273c50;
+    min-height: 80px;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    margin-right: 0;
+}
+#header_fede .brand {
+    float: left;
+    width: 240px;
+    min-height: 80px;
+    padding: 0 0 0 10px;
+    position: relative;
+    background: #1abc9c url(../img/logo.png) no-repeat 25px 26px;
+}
+#header_fede .logo {
+    color: #fff;
+    font-size: 1.7em;
+    text-transform: uppercase;
+    padding: 23px 0 0 63px;
+    display: inline-block;
+}
+#header_fede .logo span {
+    font-weight: 700;
+}
+#header_fede .toggle-navigation button:active, #header .toggle-navigation button:hover, #header button#toggle-mail:active, #header button#toggle-mail:hover {
+    background: #1abc9c;
+}
+#header_fede .toggle-navigation button:hover i, #header button#toggle-mail:hover i {
+    color: #F6F6F6;
+}
+#header_fede .toggle-navigation.toggle-left {
+    margin: 23px 0 0 20px;
+    display: inline-block;
+}
+#header_fede .btn-default {
+    padding: 3px 9px;
+    background: #F6F6F6;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+#header_fede .btn-default .fa-bars, #header .btn-default .fa-comment {
+    cursor: pointer;
+    color: #797979;
+}
+#header_fede .user-nav {
+    float: right;
+    padding-top: 23px;
+    padding-right: 20px;
+}
 .user-nav ul li {
     display: inline-block;
     vertical-align: middle;

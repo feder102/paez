@@ -22,15 +22,12 @@ class UsuariosFixture extends TestFixture
         'USUARIO' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'CLAVE' => ['type' => 'string', 'length' => 150, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'PERFIL' => ['type' => 'string', 'length' => 150, 'null' => true, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        '_indexes' => [
-            'COD_VENDED' => ['type' => 'index', 'columns' => ['COD_VENDED'], 'length' => []],
-        ],
         '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['ID_USUARIO'], 'length' => []],
             'ID_USUARIO' => ['type' => 'unique', 'columns' => ['ID_USUARIO'], 'length' => []],
-            'usuarios_ibfk_1' => ['type' => 'foreign', 'columns' => ['COD_VENDED'], 'references' => ['vendedores', 'COD_VENDED'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
-            'engine' => 'InnoDB',
+            'engine' => 'MyISAM',
             'collation' => 'utf8_general_ci'
         ],
     ];

@@ -31,6 +31,8 @@ class UsuariosTable extends Table
         parent::initialize($config);
 
         $this->setTable('usuarios');
+        $this->setDisplayField('ID_USUARIO');
+        $this->setPrimaryKey('ID_USUARIO');
     }
 
     /**
@@ -43,8 +45,7 @@ class UsuariosTable extends Table
     {
         $validator
             ->integer('ID_USUARIO')
-            ->requirePresence('ID_USUARIO', 'create')
-            ->notEmpty('ID_USUARIO')
+            ->allowEmpty('ID_USUARIO', 'create')
             ->add('ID_USUARIO', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
