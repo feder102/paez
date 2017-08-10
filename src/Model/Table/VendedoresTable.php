@@ -31,10 +31,10 @@ class VendedoresTable extends Table
         parent::initialize($config);
 
         $this->setTable('vendedores');
-        $this->setDisplayField('COD_VENDED');
+        $this->setDisplayField('NOMBRE_VEN');
         $this->setPrimaryKey('COD_VENDED');
         $this->belongsTo('Comprobantes', [
-            'foreignKey' => 'N_COMP'
+            'foreignKey' => 'COD_VEDED'
         ]);
     }
 

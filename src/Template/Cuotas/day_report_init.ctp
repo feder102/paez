@@ -11,14 +11,30 @@
     'complete'=>''
   ));
 ?>
+<style media="screen">
+select.input-lg {
+    height: 46px;
+    line-height: 22px !important;
+}
+.row_fede {
 
+}
+.row_fede {
+    max-width: 80rem;
+}
+.row_fede {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+}
+</style>
 <div class="reportes index large-10 medium-9 columns content" ng-controller="ReporteIndex">
     <h3><?= __('Reporte diario') ?></h3>
     <?php
       // pr($todos);
     ?>
             <!--tiles start-->
-    <div class="row">
+    <div class="row_fede">
         <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
             <div class="dashboard-tile detail tile-purple">
                 <div class="content">
@@ -32,32 +48,38 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-5 col-lg-5 col-md-5">
+    <div class="col-xs-6 col-lg-6 col-md-6">
+      <label for="">Estado de pagos</label>
         <div class="panel panel-default">
           <div class="radio">
-              <input class="icheck" type="radio" checked="" name="rad1">
+              <input class="icheck" type="radio" checked="" value="Todos" ng-model="radio_but">
               <label>Todos</label>
           </div>
           <div class="radio">
-              <input class="icheck" type="radio" name="rad1">
+              <input class="icheck" type="radio" value="Pendientes" ng-model="radio_but">
               <label>Pendientes</label>
           </div>
           <div class="radio">
-              <input class="icheck" type="radio" name="rad1">
+              <input class="icheck" type="radio" value="Cobrados" ng-model="radio_but">
               <label>Cancelados</label>
           </div>
         </div>
     </div>
-    <div class="col-xs-5 col-lg-5 col-md-5">
-      <div class="form-group">
-          <select class="form-control input-lg">
-              <option value="">Javier</option>
-              <option value="">fede</option>
-              <option value="">Ni idea</option>
-              <option value="">OK</option>
-          </select>
+    <div class="col-xs-6 col-lg-6 col-md-6">
+      <div class="form-group" >
+        <label for="">Vendedores</label>
+        <select class="form-control" ng-model="vendedores_aux">
+        <!-- ng-options="r.COD_VENDED as r.NOMBRE_VEN for r in vendedores track by vendedores.COD_VEDED" -->
+          <option ng-repeat="r in vendedores track by $index"  value="{{r.COD_VENDED}}">{{r.NOMBRE_VEN}}</option>
+        </select>
       </div>
     </div>
+    <div class="col-xs-12 col-lg-12 col-md-12">
+      <div class="panel-body" style="float: right !important;">
+          <button type="button" ng-click="search()" class="btn btn-info"><i class="fa fa-search"></i> Buscar</button>
+      </div>
+    </div>
+
     <table st-table="reportes" class="table table-striped">
         <thead>
             <!-- <tr>
@@ -69,6 +91,7 @@
                 <th st-sort="COD_CLIENT" st-skip-natural="true">Cod.Cliente</th>
                 <th st-sort="RAZON_SOCI" st-skip-natural="true">Nombre.Cliente</th>
                 <th st-sort="COD_VENDED" st-skip-natural="true">Vendedor</th>
+                <th st-sort="ESTADO_VTO" st-skip-natural="true">ESTADO</th>
                 <th st-sort="N_COMP_CAN" st-skip-natural="true">Num. Comp. Cancelado</th>
                 <th st-sort="FECHA_CAN" st-skip-natural="true">Cancelado</th>
                 <th st-sort="IMPORTE_VT" st-skip-natural="true">Importe cuota</th>
@@ -77,10 +100,11 @@
         </thead>
         <tbody>
             <?php //foreach ($clientes as $cliente): ?>
-            <tr ng-repeat="row in reportes">
+            <tr ng-repeat="row in reportes track by row.ID_CUOTA">
                   <td>{{row.c.COD_CLIENT}}</td>
                   <td>{{row.cl.RAZON_SOCI}}</td>
                   <td>{{row.c.COD_VENDED}}</td>
+                  <td>{{row.ESTADO_VTO}}</td>
                   <td>{{row.N_COMP_CAN}}</td>
                   <td>{{row.FECHA_CAN | date:"dd/MM/yyyy 'a las' h:mma"}}</td>
                   <td>$ {{row.IMPORTE_VT}}</td>
@@ -115,14 +139,56 @@
 mainApp.controller('ReporteIndex', function($scope,$http){
 
     $scope.reportes = <?php echo json_encode($todos) ?>;
+    $scope.vendedores = <?php echo json_encode($vendedores) ?>;
+    $scope.radio_but = 'Todos';
+    var aux = {'COD_VENDED': -1,'NOMBRE_VEN':'Todos'};
+    $scope.vendedores_aux = -1;//TIENE EL CODIGO DE VENDEDORES EL -1 TIENE TODOS LOS VENDEDORES
+    $scope.vendedores.splice(0,0,aux)
     console.log($scope.reportes);
-    $scope.vercomprobantecliente = function (cli){
-      var url= "<?php echo Router::url(array('controller' => 'comprobantes', 'action' => 'vercomprobantecliente')) ?>" + '/' + cli;
-      location.href = url;
+    $scope.search = function (){
+      // debugger;
+      if($scope.radio_but == "Todos"){
+        $http({
+            method: 'get',
+            url: "<?php echo Router::url(array('controller' => 'cuotas', 'action' => 'todosajax')) ?>" + '/' + $scope.vendedores_aux
+        }).then(function (response) {
+          debugger;
+          $scope.reportes = [];
+          $scope.reportes = response.data;
+          console.log($scope.reportes);
+        },function (error){
+            console.log(error);
+        });
+      }else{
+        if($scope.radio_but == "Pendientes"){
+          $http({
+              method: 'get',
+              url: "<?php echo Router::url(array('controller' => 'cuotas', 'action' => 'pendientes')) ?>" + '/' + $scope.vendedores_aux
+          }).then(function (response) {
+              debugger;
+              $scope.reportes = [];
+              $scope.reportes = response.data;
+              console.log($scope.reportes);
+          },function (error){
+              console.log(error);
+          });
+        }else{//COBRADOS
+          $http({
+              method: 'get',
+              url: "<?php echo Router::url(array('controller' => 'cuotas', 'action' => 'cobrados')) ?>" + '/' + $scope.vendedores_aux
+          }).then(function (response) {
+            debugger;
+            $scope.reportes = [];
+            $scope.reportes = response.data;
+            console.log($scope.reportes);
+          },function (error){
+              console.log(error);
+          });
+        }
+      }
+
+      // location.href = url;
     }
-    $scope.vercliente = function (cli){
-      var url= "<?php echo Router::url(array('controller' => 'clientes', 'action' => 'view')) ?>" + '/' + cli;
-      location.href = url;
-    }
+
 });
 </script>
