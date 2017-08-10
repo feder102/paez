@@ -5,11 +5,11 @@
   */
   //http://lorenzofox3.github.io/smart-table-website/
   use Cake\Routing\Router;
-  $this->Paginator->options(array(
-    'update'=>'#content',
-    'before'=>'',
-    'complete'=>''
-  ));
+  // $this->Paginator->options(array(
+  //   'update'=>'#content',
+  //   'before'=>'',
+  //   'complete'=>''
+  // ));
 ?>
 <style media="screen">
 select.input-lg {

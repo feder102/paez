@@ -14,7 +14,7 @@ use Cake\ORM\TableRegistry;
 class CuotasController extends AppController
 {
     public $paginate = [
-         'limit' => 20,
+         'limit' => 50,
          'order' => [
             'Clientes.RAZON_SOCI' => 'asc'
          ]
@@ -91,16 +91,11 @@ class CuotasController extends AppController
       $this->set(compact('todos','vendedores'));
       $this->set(array('todos'=> $sql_todo,
                         'vendedores'=>$vendedores
-                ));
+      ));
     }
     public function pendientes($cod_vended = null){
-      $this->autoRender = false;
-      // $this->layout = ($this->request->is("ajax")) ? "ajax" : "default";
-      // $connection = ConnectionManager::get('default');
-      // $sql_pen = $connection->execute('SELECT comprobantes.cod_client,clientes.razon_soci,comprobantes.cod_vended,cuotas.ESTADO_VTO,cuotas.importe_vt
-      //             FROM cuotas left join comprobantes on cuotas.N_COMP =comprobantes.n_comp left join clientes on comprobantes.cod_client=clientes.COD_CLIENT
-      //             where cuotas.estado_vto= "PEN"
-      //             order by cuotas.id_cuota')->fetchAll('assoc');
+      // $this->autoRender = false;
+      // $this->render('day-report-init');
 
       if($cod_vended == -1){
         $sql_pen = $this->Cuotas->find()
@@ -120,13 +115,22 @@ class CuotasController extends AppController
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
                   ])
                   ->autoFields(true);
+                  $sql_pen = $this->paginate($sql_pen);
+                  // pr($sql_pen);
+                  //POR LAS COSAS QUE SE VEN EN LAS LINEAS DE ABAJO, AMO EL CAKEPHP3 ESTOY TOMANDO EL MODELO DE UNA CLASE QUE NO ESTA RELACIONADA CON CUOTA Y ASI TOD FUNCIONA
+                  $this->Vendedores = TableRegistry::get('Vendedores');
+                  $vendedores = $this->Vendedores->find('all');
+        $this->set(compact('todos','vendedores'));
+        $this->set(array('todos'=> $sql_pen,
+                          'vendedores'=>$vendedores
+        ));
       }else{
         $sql_pen = $this->Cuotas->find()
                   ->select(['ID_CUOTA','ESTADO_VTO','c.COD_CLIENT','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
                   ->join([
                           'table' => 'Comprobantes',
                           'alias' => 'c',
-                          'type' => 'INNER',
+                          'type' => 'LEFT',
                           'conditions' => 'c.N_COMP = Cuotas.N_COMP',
                   ])
                   ->distinct ('ID_CUOTA')
@@ -138,19 +142,18 @@ class CuotasController extends AppController
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
                   ])
                   ->autoFields(true);
+                  $sql_pen = $this->paginate($sql_pen);
+                  //POR LAS COSAS QUE SE VEN EN LAS LINEAS DE ABAJO, AMO EL CAKEPHP3 ESTOY TOMANDO EL MODELO DE UNA CLASE QUE NO ESTA RELACIONADA CON CUOTA Y ASI TOD FUNCIONA
+                  $this->Vendedores = TableRegistry::get('Vendedores');
+                  $vendedores = $this->Vendedores->find('all');
+                  $this->set(compact('todos','vendedores'));
+                  $this->set(array('todos'=> $sql_pen,
+                                    'vendedores'=>$vendedores
+                  ));
       }
-      // pr($sql_pen->toArray());
-      $a = array();
-      $a = $sql_pen->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
-      $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
-        // pr($a);
-      $this->set(compact(array(
-          'data' => $a,
-           '_serialize' => array('data')
-      )));
     }
     public function cobrados($cod_vended = null){
-      $this->autoRender = false;
+      // $this->autoRender = false;
       // $connection = ConnectionManager::get('default');
       // $results = $connection->execute('SELECT comprobantes.cod_client,clientes.razon_soci,comprobantes.cod_vended,cuotas.ESTADO_VTO,cuotas.importe_vt
       //             FROM cuotas left join comprobantes on cuotas.N_COMP =comprobantes.n_comp left join clientes on comprobantes.cod_client=clientes.COD_CLIENT
@@ -173,6 +176,14 @@ class CuotasController extends AppController
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
                   ])
                   ->autoFields(true);
+                  $sql_cobrados = $this->paginate($sql_cobrados);
+                  //POR LAS COSAS QUE SE VEN EN LAS LINEAS DE ABAJO, AMO EL CAKEPHP3 ESTOY TOMANDO EL MODELO DE UNA CLASE QUE NO ESTA RELACIONADA CON CUOTA Y ASI TOD FUNCIONA
+                  $this->Vendedores = TableRegistry::get('Vendedores');
+                  $vendedores = $this->Vendedores->find('all');
+                  $this->set(compact('todos','vendedores'));
+                  $this->set(array('todos'=> $sql_cobrados,
+                                    'vendedores'=>$vendedores
+                  ));
       }else{
         $sql_cobrados = $this->Cuotas->find()
                   ->select(['c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
@@ -190,21 +201,19 @@ class CuotasController extends AppController
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
                   ])
                   ->autoFields(true);
+                  $sql_cobrados = $this->paginate($sql_cobrados);
+                  //POR LAS COSAS QUE SE VEN EN LAS LINEAS DE ABAJO, AMO EL CAKEPHP3 ESTOY TOMANDO EL MODELO DE UNA CLASE QUE NO ESTA RELACIONADA CON CUOTA Y ASI TOD FUNCIONA
+                  $this->Vendedores = TableRegistry::get('Vendedores');
+                  $vendedores = $this->Vendedores->find('all');
+                  $this->set(compact('todos','vendedores'));
+                  $this->set(array('todos'=> $sql_cobrados,
+                                    'vendedores'=>$vendedores
+                  ));
       }
 
-
-                // $sql_pen = $this->paginate($query);
-      $a = array();
-      $a = $sql_cobrados->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
-      $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
-        // pr($a);
-      $this->set(compact(array(
-          'data' => $a,
-           '_serialize' => array('data')
-      )));
     }
     public function todosajax($cod_vended = null){
-      $this->autoRender = false;
+      // $this->autoRender = false;
       if($cod_vended == -1){
         $sql = $this->Cuotas->find()
                   ->select(['ID_CUOTA','c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
@@ -221,35 +230,40 @@ class CuotasController extends AppController
                   'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
                   ])
                   ->autoFields(true);
+                  $sql = $this->paginate($sql);
+                  //POR LAS COSAS QUE SE VEN EN LAS LINEAS DE ABAJO, AMO EL CAKEPHP3 ESTOY TOMANDO EL MODELO DE UNA CLASE QUE NO ESTA RELACIONADA CON CUOTA Y ASI TOD FUNCIONA
+                  $this->Vendedores = TableRegistry::get('Vendedores');
+                  $vendedores = $this->Vendedores->find('all');
+                  $this->set(compact('todos','vendedores'));
+                  $this->set(array('todos'=> $sql,
+                                    'vendedores'=>$vendedores
+                  ));
       }else{
         $sql = $this->Cuotas->find()
-                            ->select(['ID_CUOTA','c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
-                            ->join([
-                                    'table' => 'Comprobantes',
-                                    'alias' => 'c',
-                                    'type' => 'INNER',
-                                    'conditions' => 'c.N_COMP = Cuotas.N_COMP',
-                            ])
-                            ->where(['c.COD_VENDED'=> $cod_vended])
-                            ->contain(['Comprobantes','Comprobantes.Clientes'])
-                            ->join(['table' => 'Clientes',
-                            'alias' => 'cl',
-                            'type' => 'INNER',
-                            'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
-                            ])
-                            ->autoFields(true);
+              ->select(['ID_CUOTA','c.COD_CLIENT','ESTADO_VTO','cl.RAZON_SOCI', 'c.COD_VENDED','Cuotas.N_COMP_CAN','Cuotas.FECHA_CAN','Cuotas.IMPORTE_VT'])
+              ->join([
+                      'table' => 'Comprobantes',
+                      'alias' => 'c',
+                      'type' => 'INNER',
+                      'conditions' => 'c.N_COMP = Cuotas.N_COMP',
+              ])
+              ->where(['c.COD_VENDED'=> $cod_vended])
+              ->contain(['Comprobantes','Comprobantes.Clientes'])
+              ->join(['table' => 'Clientes',
+              'alias' => 'cl',
+              'type' => 'INNER',
+              'conditions' => 'cl.COD_CLIENT = c.COD_CLIENT',
+              ])
+              ->autoFields(true);
+              $sql = $this->paginate($sql);
+              //POR LAS COSAS QUE SE VEN EN LAS LINEAS DE ABAJO, AMO EL CAKEPHP3 ESTOY TOMANDO EL MODELO DE UNA CLASE QUE NO ESTA RELACIONADA CON CUOTA Y ASI TOD FUNCIONA
+              $this->Vendedores = TableRegistry::get('Vendedores');
+              $vendedores = $this->Vendedores->find('all');
+              $this->set(compact('todos','vendedores'));
+              $this->set(array('todos'=> $sql,
+                                'vendedores'=>$vendedores
+              ));
       }
-
-
-                $sql = $this->paginate($sql);
-      $a = array();
-      $a = $sql->toArray();//CASTEA LA VARIABLE EN UN ARREGLO
-      $a = print_r(json_encode($a));// CONVIERTE EL ARREGLO EN UN ARREGLO JSON PARA QUE PUEDA SER LEIDO EN LA FUNCION GET YA QUE ESTA SOLO LEE TEXTOS PLANOS Y JSON
-        // pr($a);
-      $this->set(compact(array(
-          'data' => $a,
-           '_serialize' => array('data')
-      )));
     }
     /**
      * Add method
