@@ -41,7 +41,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php echo $this->Html->script('../bootstrap/js/bootstrap.min'); ?>
     <?php echo $this->Html->script(array('angular/angular.js','angular/1.5.6-angular-route.min.js','angular/app/app')); ?>
     <?php echo $this->Html->script('../angular-smart-table/dist/smart-table'); ?>
+    <?php echo $this->Html->script('jspdf.debug'); ?>
+    <?php echo $this->Html->script('jspdf.plugin.autotable.js'); ?>
+    <!--  -->
+    <!-- https://simonbengtsson.github.io/jsPDF-AutoTable/#html https://github.com/simonbengtsson/jsPDF-AutoTable-->
     <?php //echo $this->Html->script('modernizr-2.6.2.min'); ?>
+
 
 
 

@@ -5,11 +5,11 @@
   */
   //http://lorenzofox3.github.io/smart-table-website/
   use Cake\Routing\Router;
-  // $this->Paginator->options(array(
-  //   'update'=>'#content',
-  //   'before'=>'',
-  //   'complete'=>''
-  // ));
+  $this->Paginator->options(array(
+    'update'=>'#content',
+    'before'=>'',
+    'complete'=>''
+  ));
 ?>
 <style media="screen">
 select.input-lg {
@@ -74,13 +74,16 @@ select.input-lg {
         </select>
       </div>
     </div>
-    <div class="col-xs-12 col-lg-12 col-md-12">
+    <div class="col-xs-6 col-lg-6 col-md-6">
       <div class="panel-body" style="float: right !important;">
           <button type="button" ng-click="search()" class="btn btn-info"><i class="fa fa-search"></i> Buscar</button>
       </div>
+      <div class="panel-body" style="float: right !important;">
+        <button class="btn btn-info" ng-click="demoFromHTML()"><i class="fa fa-search"></i>Exportar a PDF</button>
+      </div>
     </div>
-
-    <table st-table="reportes" class="table table-striped">
+<div id="customers">
+    <table id="basic-table" st-table="reportes" class="table table-striped">
         <thead>
             <!-- <tr>
               <th colspan="1"><input st-search="reportes.cl.COD_CLIENT" placeholder="Codigo de cliente" class="input-sm form-control" type="search"/></th>
@@ -123,6 +126,8 @@ select.input-lg {
             <?php //endforeach; ?>
         </tbody>
     </table>
+  </div>
+
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('Primero')) ?>
@@ -145,6 +150,7 @@ mainApp.controller('ReporteIndex', function($scope,$http){
     $scope.vendedores_aux = -1;//TIENE EL CODIGO DE VENDEDORES EL -1 TIENE TODOS LOS VENDEDORES
     $scope.vendedores.splice(0,0,aux)
     console.log($scope.reportes);
+
     $scope.search = function (){
       // debugger;
       if($scope.radio_but == "Todos"){
@@ -162,6 +168,17 @@ mainApp.controller('ReporteIndex', function($scope,$http){
 
       // location.href = url;
     }
+    $scope.demoFromHTML = function () {
+
+    var pdf = new jsPDF('p', 'pt');
+    debugger;
+    var elem = document.getElementById("basic-table");
+    var res = pdf.autoTableHtmlToJson(elem);
+    pdf.autoTable(res.columns, res.data);
+    pdf.save("table.pdf");
+    }
+
+
 
 });
 </script>
