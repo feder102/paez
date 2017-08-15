@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'FeJa Cobranzas OnLine';
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
 
 
-
+<?php
+$this->Html->meta(
+    'favicon.ico',
+    '/favicon.ico',
+    ['type' => 'ico']
+);
+?>
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('font-awesome.min') ?>
     <?= $this->Html->css('animate') ?>
@@ -59,7 +65,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
   <nav  data-topbar role="navigation">
       <ul class="title-area large-3 medium-4 columns">
           <li class="name">
-              <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+              <h1><a href=""><?php //$this->fetch('title') ?></a></h1>
           </li>
       </ul>
       <div class="toggle-navigation toggle-left">
